@@ -1,387 +1,387 @@
-# Module 3 - Combinational and Sequential Optimization
+ # 🔍 Module-3 Introduction to Combinational And Sequential Optimization
+ ## Objectives
+ 
+To understand the concept of logic optimization in digital circuits.
+To study combinational and sequential logic optimization techniques.
+To perform synthesis using the Yosys synthesis tool.
+To map Verilog designs to the SKY130 standard-cell library.
+To simulate Verilog designs using Icarus Verilog (Icarus Verilog).
+To verify circuit behavior using GTKWave.
+To analyze optimized gate-level netlists generated after synthesis.
+## Tools And Technologies
+HDL: Verilog
+Simulator: Icarus Verilog
+Waveform Viewer: GTKWave
+Synthesis Tool: Yosys
+PDK: SKY130
+Operating System: Linux(Ubuntu)
+# 📚 Table of Contents
 
-This document covers the optimization techniques applied during logic synthesis for both combinational and sequential circuits, along with the corresponding laboratory exercises performed using Yosys.
+1. Introduction to Logic Optimizations
+2. Sequential Logic Optimizations
+3. AND Gate Optimization (opt_check)
+4. OR Gate Optimization (opt_check2)
+5. Three-Input AND Gate Optimization (opt_check3)
+6. Verilog Code for D Flip-Flop Constant Propagation
+7. Simulation Waveform – dff_const1
+8. Simulation Waveform – dff_const2
+9. D Flip-Flop Netlist Before Optimization
+10. Sequential Logic Optimization Result
+11. D Flip-Flop Constraint Simulation
+12. Synthesized D Flip-Flop Circuit
+13. Counter Optimization
+14. Counter Optimization Result
+15. Optimized Counter Circuit
+16. Optimized Counter Netlist
+17. Overall Result
+18. Conclusion
 
----
-## Introduction
+## 1.Introduction to Logic Optimizations
+Logic optimization reduces the hardware area, power consumption, and delay while preserving the original functionality of the design. In this module, combinational and sequential optimization techniques are studied using the SKY130 standard-cell library and Yosys synthesis tool.
+<img width="1277" height="595" alt="Screenshot (69)" src="https://github.com/user-attachments/assets/534b0d39-3317-4dba-80d2-2f2a0190e454" />
 
-Digital circuit optimization is an important stage of the synthesis process. After converting RTL into logic gates, the synthesis tool analyzes the circuit to remove unnecessary logic, simplify Boolean expressions, and generate an implementation that consumes less area while preserving the required functionality.
+### Result
+The concept of constant propagation was studied to understand how synthesis tools simplify logic by replacing constant inputs.
 
-This session explored the optimization techniques Yosys applies to both combinational and sequential circuits.
+## 2. 🔄 Sequential Logic Optimizations
+Sequential logic optimization improves sequential circuits by optimizing registers and logic without changing circuit behavior. Techniques such as sequential constant propagation, retiming, and state optimization were introduced.
+<img width="1096" height="581" alt="Screenshot (70)" src="https://github.com/user-attachments/assets/cb6ca621-a87f-4a50-b89f-942325ff151f" />
 
----
 
-## Combinational Logic Optimization
+### Result
+The different sequential optimization techniques were studied to understand how they improve circuit performance and efficiency.
 
-Combinational optimization reduces unnecessary logic **without changing circuit functionality**. The synthesis tool analyzes Boolean expressions and removes redundant hardware, producing a smaller and more efficient gate-level implementation.
+## 3. ⚙️ AND Gate Optimization (opt_check)
+```Verilog
+module opt_check (
+    input a,
+    input b,
+    output y
+);
 
-### Objectives
+assign y = a & b;
 
-- Reduce the number of logic gates.
-- Simplify Boolean expressions.
-- Minimize chip area.
-- Improve circuit speed.
-- Reduce power consumption.
+endmodule
+```
+### Yosys Commands
+```bash
+yosys
+read_verilog opt_check.v
+synth -top opt_check
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+```
+<img width="958" height="930" alt="opt check and gate mod3 start 1st" src="https://github.com/user-attachments/assets/fff7b4a0-edc0-4608-a821-edf0b32ebd47" />
 
----
+### Result
+The AND gate was successfully synthesized and mapped to the SKY130 and2 standard cell.
+## 4. ⚙️ OR Gate Optimization (opt_check2)
+```Verilog 
+module opt_check2 (
+    input a,
+    input b,
+    output y
+);
 
-## Sequential Logic Optimization
+assign y = a | b;
 
-Sequential optimization applies to circuits containing memory elements such as flip-flops.
+endmodule
+```
+### Yosys Commands
+```bash
+yosys
+read_verilog opt_check2.v
+synth -top opt_check2
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+```
+<img width="958" height="930" alt="norgate mod3 2nd" src="https://github.com/user-attachments/assets/fe49600c-e152-4be2-8f05-9f0a6bdbdcd3" />
 
-Unlike combinational optimization, the synthesis tool must **preserve the behavior of sequential elements** while removing unnecessary registers and simplifying the logic connected to them.
 
-### Typical Goals
+### Result
+The OR gate was synthesized successfully and mapped to the SKY130 or2 standard cell.
 
-- Removing redundant flip-flops.
-- Propagating constant values through sequential logic.
-- Eliminating unreachable logic.
-- Improving timing while maintaining functional equivalence.
+## 5. ⚙️ Three-Input AND Gate Optimization (opt_check3)
+```Verilog
+module opt_check3 (
+    input a,
+    input b,
+    input c,
+    output y
+);
 
-### Sequential Optimization of D Flip-Flop
-### Verilog Code:
+assign y = a & b & c;
 
+endmodule
+```
+### Yosys Commands
+```bash
+yosys
+read_verilog opt_check3.v
+synth -top opt_check3
+abc -liberty ../lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+```
+<img width="958" height="930" alt="3ip and gate 3rd image module3" src="https://github.com/user-attachments/assets/bfac1861-30c3-4f2e-b5b9-0041b9954059" />
+
+### Result
+The three-input AND gate was successfully synthesized and mapped to the SKY130 and3 standard cell.
+
+## 6. Verilog Code for D Flip-Flop Constant Propagation
+Description
+This Verilog code demonstrates sequential constant propagation using two D Flip-Flop designs (dff_const1 and dff_const2). The output is assigned constant values to observe optimization during synthesis.
+```verilog
+// dff_const1.v
+module dff_const1(input clk, input reset, output reg q);
+always @(posedge clk, posedge reset)
+begin
+    if(reset)
+        q <= 1'b0;
+    else
+        q <= 1'b1;
+end
+endmodule
+```
+```verilog
+// dff_const2.v
+module dff_const2(input clk, input reset, output reg q);
+always @(posedge clk, posedge reset)
+begin
+    if(reset)
+        q <= 1'b1;
+    else
+        q <= 1'b1;
+end
+endmodule
+```
+### Commands
+```bash
+vim dff_const1.v
+vim dff_const2.v
+```
+Output
+<img width="958" height="930" alt="code 4th image" src="https://github.com/user-attachments/assets/f9222591-7c82-484d-a1a6-489039067849" />
+
+
+## 7. Simulation Waveform – dff_const1
+Description
+Simulation waveform showing the behavior of dff_const1. The output changes according to the reset signal.
+### Code
 ```verilog
 module dff_const1(input clk, input reset, output reg q);
 always @(posedge clk, posedge reset)
 begin
-	if(reset)
-		q <= 1'b0;
-	else
-		q <= 1'b1;
+    if(reset)
+        q <= 1'b0;
+    else
+        q <= 1'b1;
 end
 endmodule
 ```
 
-### Figure 1: dff_const1
-
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/8916a2ad-bd78-46dc-92b0-bcc2c0d44270" />
-
-The synthesized circuit removes unnecessary sequential logic while preserving the behavior of the original design.
-
-### Figure 2: Waveform Verification
-
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/5494e54e-dd87-49d4-99cb-2222e878c07d" />
-
----
-
-## Constant Propagation
-
-Constant propagation replaces signals that always carry a fixed logic value **directly with that constant** during synthesis.
-
-Instead of implementing logic to compute an already-known value, the synthesis tool substitutes the constant and removes redundant gates.
-
-### Advantages
-
-- Reduces logic complexity.
-- Decreases hardware utilization.
-- Improves timing.
-- Lowers power consumption.
-
-### Figure 3: Constant Propagation Example
-
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/6a436400-01cf-4ec4-98e0-216e12bc2e27" />
-
-The synthesized netlist shows that constant-valued signals are propagated through the logic, allowing unnecessary gates to be removed during optimization.
-
----
-
-## Unused Output Optimization
-
-If a signal or output is never used by the remaining circuit, the synthesis tool recognizes that it has no effect on final functionality and **automatically removes it** during optimization.
-
-This reduces the total gate count and prevents unnecessary hardware from being implemented.
-
-This demonstrates that synthesis tools generate hardware only for logic that actually contributes to the final outputs.
-
-### Figure 4: Logic Simplification after Optimization
-
-<img width="1552" height="580" alt="WhatsApp Image 2026-08-22 at 6 51 48 PM" src="https://github.com/user-attachments/assets/00ff296a-2c03-4c32-833e-8059830e28a3" />
-
-The optimized netlist contains fewer logic gates while maintaining the same functionality as the original RTL design.
-
----
-
-## State Optimization
-
-Finite State Machines (FSMs) can contain equivalent or unnecessary states. During optimization, these states may be **merged or removed**, reducing the required hardware while preserving the original behavior.
-
-### State Optimization Generally Includes
-
-- Eliminating equivalent states.
-- Efficient state encoding.
-- Simplifying next-state logic.
-- Reducing overall hardware complexity.
-
----
-
-## Logic Cloning
-
-Logic cloning is a performance optimization where selected logic cells are **duplicated** to reduce fan-out and improve timing.
-
-Instead of one gate driving many loads, additional copies are created so each copy drives fewer destinations. This reduces delay on critical timing paths.
-
----
-
-## Retiming
-
-Retiming is a sequential optimization technique where flip-flops are **repositioned across combinational logic** without changing circuit functionality.
-
-Its purpose is to balance propagation delays between pipeline stages and improve the maximum operating frequency.
-
-Unlike other optimizations, retiming modifies only **register placement** while preserving the logical behavior of the design.
-
----
-
-## Optimization Passes Performed in Yosys
-
-During synthesis, Yosys automatically performs several optimization passes to simplify the generated hardware.
-
-| Optimization Pass | Purpose |
-|---|---|
-| Constant propagation | Replace known-constant signals directly |
-| Dead logic elimination | Remove logic with no effect on outputs |
-| Boolean simplification | Reduce Boolean expressions |
-| Removal of unused wires | Remove unreferenced signals |
-| Removal of unused cells | Remove unreferenced gates/cells |
-| Expression simplification | Simplify equivalent expressions |
-| Resource sharing | Reuse hardware across similar operations |
-
-These optimizations collectively produce an efficient gate-level netlist.
-
----
-
-# Laboratory Exercises
-
-## Constant Propagation
-
-A simple combinational circuit was synthesized to observe how Yosys replaces constant values directly within the logic network.
-
-After optimization, unnecessary gates were removed, producing a simpler implementation.
-
-### Result
-
-The constant value was propagated through the logic, reducing redundant hardware.
-
----
-
-##  Logic Simplification
-
-A multiplexer-based design was synthesized to demonstrate how Boolean expressions simplify when one input remains constant.
-
-The synthesized circuit contained fewer logic gates while maintaining identical functionality.
-
-### Result
-
-The multiplexer logic was simplified because one of its inputs was fixed to a constant value.
-
----
-
-## Expression Optimization
-
-Additional combinational logic examples were analyzed to observe how the synthesis tool recognizes equivalent expressions and minimizes redundant hardware.
-
-### Result
-
-Equivalent expressions were simplified and redundant logic was reduced.
-
----
-
-## Boolean Reduction
-
-Nested conditional expressions were synthesized and optimized.
-
-Yosys simplified the resulting Boolean equation, removing unnecessary logic while preserving the expected output.
-
-### Result
-
-The optimized design required less hardware while maintaining the same logical behavior.
-
----
-
-## Sequential Optimization 
-
-A D flip-flop with an asynchronous reset and constant assignment was synthesized.
-
-Since the output eventually settled to a constant value, the synthesis tool simplified portions of the sequential logic.
-
-### Result
-
-Unnecessary sequential logic was identified and optimized while maintaining the expected behavior.
-
----
-
-## Constant Register Optimization
-
-A flip-flop whose output always remained at logic `1` was synthesized.
-
-Since the register never changed state, Yosys optimized the circuit by removing unnecessary sequential elements and replacing them with constant logic wherever applicable.
-
-### Constant Register Optimization
-### Verilog Code:
-
+### Commands
+```bash
+iverilog -o dff_const1.out dff_const1.v tb_dff_const1.v
+gtkwave tb_dff_const1.vcd
+```
+Output
+<img width="958" height="930" alt="wave 5th" src="https://github.com/user-attachments/assets/54c5497a-2444-4b3b-be37-2906dd7e0ea6" />
+
+
+## 8. Simulation Waveform – dff_const2
+Description
+Simulation waveform of dff_const2 showing constant output after optimization.
+### Code
 ```verilog
 module dff_const2(input clk, input reset, output reg q);
 always @(posedge clk, posedge reset)
 begin
-	if(reset)
-		q <= 1'b1;
-	else
-		q <= 1'b1;
+    if(reset)
+        q <= 1'b1;
+    else
+        q <= 1'b1;
 end
 endmodule
 ```
 
-### Figure 5: dff_const2
+### Commands
+```bash
+iverilog -o dff_const2.out dff_const2.v tb_dff_const2_.v
+gtkwave tb_dff_const2_.vcd
+```
+Output
+<img width="958" height="930" alt="6th" src="https://github.com/user-attachments/assets/81fa31f8-9500-41a5-b01c-2d2de2b22f1e" />
 
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/dfb0ef3b-e0c9-46f5-a27f-4e0f992c33c8" />
 
-Since the register output always remains at logic `1`, Yosys replaces the flip-flop with constant logic, reducing hardware complexity.
+## 9. D Flip-Flop Netlist Before Optimization
+Description
+The synthesized netlist before applying sequential optimization.
+### Commands
+```bash
+yosys
+read_liberty -lib sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog dff_const1.v
+synth -top dff_const1
+abc -liberty sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+```
+Output
+<img width="958" height="930" alt="dff const1 7th" src="https://github.com/user-attachments/assets/28083af0-94a2-4c36-85f4-853ff4a617db" />
 
-### Figure 6: Waveform Verification
 
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/4206bcfd-9e4e-474f-9b5c-5c51382d1536" />
 
-The waveform confirms that the optimized circuit produces the expected output behavior after synthesis.
+## 10. Sequential Logic Optimization Result
+Description
+The optimized circuit after sequential constant propagation. Redundant logic is removed by the synthesis tool.
+### Commands
+```bash
+yosys
+read_liberty -lib sky130_fd_sc_hd__tt_025C_1v80.lib
+read_verilog dff_const2.v
+synth -top dff_const2
+abc -liberty sky130_fd_sc_hd__tt_025C_1v80.lib
+show
+```
+Output
+<img width="958" height="930" alt="seq optimization 8th" src="https://github.com/user-attachments/assets/ec7fe013-f9d5-4ab3-ac20-436c7639a72a" />
 
-### Figure 7: dff_const3
 
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/33fd28b9-3965-4747-8025-31a5c535a3e9" />
 
-The final synthesized netlist reflects the cumulative effect of multiple optimization passes performed by Yosys
+## 11. D Flip-Flop Constraint Simulation
+Information
+This experiment demonstrates the simulation of a D Flip-Flop with constant propagation. The waveform verifies the behavior of the flip-flop during reset and clock transitions.
+### Code
+```
+module dff_const3(input clk, input reset, output reg q);
 
-### Figure 8: Waveform Verification
+always @(posedge clk)
+begin
+    if(reset)
+        q <= 1'b0;
+    else
+        q <= 1'b1;
+end
 
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/e71ea96a-14eb-4db2-9e7a-5b1a054ffc6e" />
-
-### figure 9: dff_const4
-
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/161b1f52-55fd-46c3-a212-8f5c32910073" />
-
-### figure 10: Waveform Verification
-
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/9674221a-92de-4165-87a8-9c4354a3b710" />
-
-### figure 11: dff_const5
-
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/68c5c623-98e7-4414-a205-ef41b3c53c98" />
-
-### figure 12: Waveform Verification
-
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/a6c3af83-87e4-40a9-af30-0c2e6173880d" />
-
----
-
-# Verification of Optimization Results
-
-## Optimization Check 1
-## Verilog Code:
-
-```verilog
-module opt_check (input a , input b , output y);
-	assign y = a?b:0;
 endmodule
 ```
+### Commands
+```bash
+iverilog -o dff_const3.out dff_const3.v dff_const3_tb.v
 
-## Figure 13: 
+gtkwave dff_const3.vcd
+```
+Output
+<img width="958" height="930" alt="dffconst3 9th" src="https://github.com/user-attachments/assets/564760ac-8465-4be7-8a5c-6b452d4f041b" />
 
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/991047e1-f8af-4583-b4c2-9ce7e78899c7" />
 
-The generated netlist confirms that unnecessary logic has been removed.
+## 12. Synthesized D Flip-Flop Circuit
+Information
+The D Flip-Flop design is synthesized using Yosys. The generated circuit is mapped to SKY130 standard cells.
+### Commands
+```bash
+yosys
 
----
+read_verilog dff_const3.v
 
-## Optimization Check 2
-Verilog Code:
+synth -top dff_const3
 
-```verilog
-module opt_check2 (input a , input b , output y);
-	assign y = a?1:b;
+show
+```
+Output
+<img width="958" height="930" alt="2ff is there set and reset 10th image" src="https://github.com/user-attachments/assets/fbcd222c-c976-47e5-8ee4-94cc75efc218" />
+
+
+## 13. Counter Optimization
+Information
+This experiment demonstrates optimization by removing unused outputs from a counter circuit.
+### Code
+```
+module counter_opt(input clk, input reset, output q);
+
+reg [2:0] count;
+
+assign q = count[0];
+
+always @(posedge clk, posedge reset)
+begin
+    if(reset)
+        count <= 3'b000;
+    else
+        count <= count + 1;
+end
+
 endmodule
 ```
+### Commands
+```bash
+yosys
 
-## Figure 14:
+read_verilog counter_opt.v
 
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/64712ff2-c7f2-4aac-9956-3ddfa1eba85e" />
+synth -top counter_opt
 
-The optimized circuit preserves the original functionality while reducing hardware.
 
----
-
-## Optimization Check 3
-Verilog Code:
-
-```verilog
-module opt_check2 (input a , input b , output y);
-	assign y = a?1:b;
-endmodule
+show
 ```
 
-## Figure 15:
 
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/151ccc07-93b5-4e7f-aa8d-668247a5b35c" />
+## 14. Counter Optimization Result
+Information
+The synthesized counter retains only the required logic after optimization.
+### Commands
+```bash
+yosys
 
-This netlist demonstrates additional logic simplifications performed by Yosys.
+read_verilog counter_opt.v
 
----
+synth -top counter_opt
 
-## Optimization Check 4
-Verilog Code:
+show
+```
+Output
+<img width="958" height="930" alt="unused op optimization 11 image" src="https://github.com/user-attachments/assets/53b8fc3f-3a6a-4937-a479-a029e2507987" />
 
-```verilog
-module opt_check4 (input a , input b , input c , output y);
- assign y = a?(b?(a & c ):c):(!c);
- endmodule
+
+
+## 15. Optimized Counter Circuit
+Information
+The optimized gate-level implementation contains only the necessary flip-flops and logic.
+### Commands
+```bash
+write_verilog -noattr counter_opt_net.v
+
+gvim counter_opt_net.v
+```
+Output
+<img width="958" height="930" alt="counter dff 3bit but 1flop there 12th image" src="https://github.com/user-attachments/assets/6d05c5ac-b53f-4dd9-87b2-4980300107a1" />
+
+
+
+## 16. Optimized Counter Netlist
+Information
+The generated netlist shows the optimized hardware after synthesis.
+### Commands
+```bash
+write_verilog -noattr counter_opt_net.v
+
+gvim counter_opt_net.v
 ```
 
-## Figure 16:
+Output
+<img width="958" height="930" alt="opt2 counter 13thimage" src="https://github.com/user-attachments/assets/bfc5cf2c-211c-41fe-b7f9-374725b41489" />
 
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/162a5803-4647-4710-a07a-bfd2257e81ce" />
 
-## Figure 17: Multiple_module_opt
+#🎯 Overall Result
 
-The multiple_module_opt design contains a top-level module with two submodules. Yosys analyzes the module hierarchy and uses flatten to combine the submodule logic into the top-level design. The opt_clean -purge and opt commands then remove unnecessary logic and optimize the circuit. The final schematic contains one AND gate and one OR gate, demonstrating how hierarchical modules can be flattened and optimized into a simpler logic representation.
+The logic optimization experiments were successfully implemented using Verilog HDL, Yosys, Icarus Verilog, GTKWave, and the SKY130 Standard Cell Library. Both combinational and sequential optimization techniques were verified through simulation and synthesis. The optimized circuits reduced hardware complexity while maintaining the original functionality.
 
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/9e2625dd-b208-4644-80f9-d1c7da7b8d11" />
+# 📝 Conclusion
 
----
+This module provided practical knowledge of logic optimization, RTL simulation, technology mapping, and gate-level synthesis. Different optimization techniques such as constant propagation, logic simplification, and counter optimization were successfully demonstrated. The synthesized netlists confirmed that redundant hardware was removed without affecting circuit behavior, achieving efficient digital circuit implementation.
 
-## Figure 18: Multiple_module_opt2
+## 👤 Author
 
-The multiple_module_opt2 design demonstrates how optimization can eliminate redundant logic in a multiple-module design. After analyzing the hierarchy and flattening the modules, opt_clean -purge and opt simplify the circuit. The final schematic shows that the output y is reduced to a constant 1'b0, while the input signals no longer affect the output, demonstrating the removal of unnecessary logic during synthesis optimization.
-
-<img width="1920" height="1060" alt="image" src="https://github.com/user-attachments/assets/6060aa98-5933-4f22-aa97-318eaf02eaf1" />
-
----
-
-## Laboratory Summary
-
-| Lab | Focus | Key Result |
-|---|---|---|
-| 1 | Constant propagation | Redundant gates removed via constant substitution |
-| 2 | Logic simplification | MUX simplified when one input was held constant |
-| 3 | Expression optimization | Equivalent expressions merged/minimized |
-| 4 | Boolean reduction | Nested conditionals reduced to simpler Boolean logic |
-| 5 | Sequential optimization | D-FF with async reset simplified to constant-driven logic |
-| 6 | Constant register optimization | Always-`1` flip-flop replaced with constant logic |
-
----
-
-# Key Learning Outcomes
-
-- Understood the difference between combinational and sequential optimization.
-- Learned how constant propagation simplifies digital circuits.
-- Observed removal of unused outputs and redundant logic during synthesis.
-- Explored optimization techniques such as state optimization, logic cloning, and retiming.
-- Analyzed how Yosys automatically performs multiple optimization passes to generate an efficient gate-level implementation.
-- Verified optimization results using synthesized netlists and schematic visualization.
-
----
-
-# Conclusion
-
-Module 3 provided practical understanding of how synthesis tools optimize RTL designs.
-
-The laboratory exercises demonstrated that Yosys can simplify combinational logic, remove redundant hardware, propagate constants, optimize sequential elements, and reduce unnecessary logic while preserving the intended functionality of the design.
-
-These optimization techniques are important for achieving efficient **area, timing, and power** characteristics in digital hardware designs.
+**Amrutha Madapa**  
+B.Tech – Electronics & Communication Engineering  
+Anurag University  
+[RTL Workshop Repository](https://github.com/madapaamrutha-svg/RTL_Workshop)
