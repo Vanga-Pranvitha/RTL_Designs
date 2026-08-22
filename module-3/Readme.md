@@ -381,7 +381,7 @@ This module provided practical knowledge of logic optimization, RTL simulation, 
 
 ## 👤 Author
 
-**Amrutha Madapa**  
+**Pranvith Vanga**  
 B.Tech – Electronics & Communication Engineering  
 Anurag University  
 [RTL Workshop Repository](https://github.com/madapaamrutha-svg/RTL_Workshop)
