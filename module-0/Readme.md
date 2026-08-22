@@ -89,7 +89,7 @@ These commands confirm that the required tools are installed and accessible from
 
 ## 👤 Author
 
-**Amrutha Madapa**  
+**Pranvitha Vanga**  
 B.Tech – Electronics & Communication Engineering  
 Anurag University  
 [RTL Workshop Repository](https://github.com/madapaamrutha-svg/RTL_Workshop)
