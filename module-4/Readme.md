@@ -346,4 +346,4 @@ Overall, the module demonstrated the complete progression from RTL design and si
 
 **Pranvitha Vanga**  
 B.Tech – Electronics and Communication Engineering  
-Your University Name
+Anurag University
