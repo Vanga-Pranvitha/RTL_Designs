@@ -49,7 +49,8 @@ It also goes one level deeper into the **design of standard cells**, including t
 
 ### 1.1 Core and Die Structure
 
-<img width="796" height="667" alt="Screenshot 2026-09-06 171141" src="https://github.com/user-attachments/assets/80fa165f-c135-497f-add2-fe634ed0d767" />
+<img width="503" height="453" alt="image" src="https://github.com/user-attachments/assets/0406143b-4b9c-4f2e-bf32-cce38a4894b1" />
+
 
 A semiconductor wafer contains several repeated rectangular regions called **dies**. Each die represents the complete physical area associated with an individual chip.
 
@@ -59,7 +60,8 @@ Therefore, the die represents the complete chip area, whereas the core is the ma
 
 ### 1.2 Core Utilization and Aspect Ratio
 
-<img width="1655" height="1078" alt="Screenshot 2026-09-06 171220" src="https://github.com/user-attachments/assets/7b0c13ad-9c03-4548-b7df-c55b25a77268" />
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/1735ccac-272b-4ede-a57b-9f54e63f52ab" />
+
 
 During floorplanning, the dimensions of the core and die have to be determined before standard-cell placement begins.
 
@@ -75,9 +77,11 @@ The required values depend on the cell count, routing requirements and physical 
 
 ### 1.3 Preplaced and Fixed Cells
 
-<img width="1437" height="1077" alt="Screenshot 2026-09-06 171321" src="https://github.com/user-attachments/assets/f4adf99b-5e49-4bda-b57b-841347a0c914" />
+<img width="1366" height="768" alt="Screenshot (146)" src="https://github.com/user-attachments/assets/4b10586a-e572-4031-b02c-1aea2847cd71" />
 
-<img width="1670" height="1065" alt="Screenshot 2026-09-06 171330" src="https://github.com/user-attachments/assets/09e753e4-9e02-4652-8c18-446d6b84130a" />
+
+<img width="1366" height="768" alt="Screenshot (147)" src="https://github.com/user-attachments/assets/cffe5dc0-cf77-4795-b725-71cf66786bc2" />
+
 
 Some blocks in an ASIC are larger than ordinary standard cells and cannot simply be placed automatically.
 
