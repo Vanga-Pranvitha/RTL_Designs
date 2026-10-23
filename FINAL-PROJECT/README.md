@@ -128,7 +128,7 @@ Final Layout / GDSII
 
 **Workflow explanation:** RTL simulation checks the logical behaviour of the design before synthesis. Synthesis generates a netlist, and gate-level simulation checks that netlist. Physical design then implements the circuit using the selected technology library and physical design rules.
 
-**Screenshot placeholder:** Insert a screenshot of the overall project workflow or tool environment here.
+
 
 ## 5. Tools and Technologies
 
@@ -239,17 +239,11 @@ RTL design translates the controller requirements into synthesizable Verilog. De
 | 5 | Simulate using a testbench | Functional results |
 | 6 | Correct any detected issues | Verified RTL |
 
-### Screenshot: RTL Source Code
+<img width="681" height="646" alt="VirtualBox_vsdworkshop_23_10_2026_23_48_24" src="https://github.com/user-attachments/assets/aee99bc4-939a-4559-a0a4-66e946bed46e" />
 
-Insert a screenshot of `pill_reminder.v` below.
+<img width="681" height="646" alt="VirtualBox_vsdworkshop_24_10_2026_03_21_23" src="https://github.com/user-attachments/assets/ce149988-bda1-4f89-b74e-91e274971403" />
 
-`<!-- Add RTL source screenshot here -->`
 
-### Screenshot: RTL Compilation or Simulation
-
-Insert the terminal output showing successful RTL simulation.
-
-`<!-- Add RTL simulation screenshot here -->`
 
 ## 9. Functional Verification
 
@@ -280,9 +274,8 @@ The RTL testbench provides stimulus to the design and evaluates the resulting re
 
 The recorded RTL simulation completed **96 checks with 0 errors**.
 
-**Result: PASS**
+<img width="681" height="646" alt="VirtualBox_vsdworkshop_24_10_2026_03_21_23" src="https://github.com/user-attachments/assets/1ba434ce-5669-4e8e-b108-22d86c39bd66" />
 
-`<!-- Add RTL testbench output screenshot here -->`
 
 ## 10. Simulation Results
 
@@ -311,9 +304,8 @@ Waveform analysis can help examine:
 - Output responses to test inputs.
 - Timing relationships between signals.
 
-**Screenshot placeholder:** Insert the GTKWave waveform screenshot here.
+<img width="1366" height="655" alt="VirtualBox_vsdworkshop_23_10_2026_20_02_00" src="https://github.com/user-attachments/assets/cdcce63d-52a2-4f73-a949-a6dfd87b2cae" />
 
-`<!-- Add GTKWave screenshot here -->`
 
 ## 11. Logic Synthesis Using Yosys
 
@@ -349,9 +341,8 @@ The reported 57 cells are **generic synthesis cells**, not a confirmed count of 
 - Provides a netlist for downstream verification.
 - Supplies an input to the physical design flow.
 
-**Screenshot placeholder:** Insert the Yosys synthesis report or terminal output here.
+<img width="1366" height="655" alt="VirtualBox_vsdworkshop_23_10_2026_20_05_17" src="https://github.com/user-attachments/assets/b46b5dc3-74ef-4539-8a8d-1233edd24b69" />
 
-`<!-- Add Yosys synthesis screenshot here -->`
 
 ## 12. Gate-Level Simulation
 
@@ -375,9 +366,9 @@ It helps identify differences between RTL behaviour and the synthesized logic. T
 - Errors reported: **0**
 - Recorded status: **PASS**
 
-**Screenshot placeholder:** Insert the gate-level simulation terminal output here.
 
-`<!-- Add gate-level simulation screenshot here -->`
+<img width="681" height="646" alt="VirtualBox_vsdworkshop_23_10_2026_22_22_40" src="https://github.com/user-attachments/assets/0c23a6a8-1883-4fd8-9b69-e005927d983b" />
+
 
 ## 13. RTL-to-GDSII Design Flow
 
@@ -437,9 +428,7 @@ It considers the size of the design, placement regions, pin locations, power dis
 
 High utilization may reduce the available routing space, while very low utilization may increase the required area. The appropriate target depends on design constraints and the flow configuration.
 
-**Screenshot placeholder:** Insert the actual floorplan view after the OpenLane floorplanning stage completes.
 
-`<!-- Add floorplanning screenshot here -->`
 
 ## 16. Placement
 
@@ -464,9 +453,6 @@ The placement engine considers connectivity and implementation constraints to po
 | Congestion information | Indicates areas with limited routing resources |
 | Timing reports | May show timing estimates for the placed design |
 
-**Screenshot placeholder:** Insert the placement result or placement report here.
-
-`<!-- Add placement screenshot here -->`
 
 ## 17. Clock Tree Synthesis
 
@@ -487,9 +473,7 @@ As a design becomes physically distributed, the clock signal may arrive at diffe
 
 CTS is only applicable where the design and flow have a clock network that requires synthesis. The exact result depends on the design's sequential logic and clock configuration.
 
-**Screenshot placeholder:** Insert the CTS report or clock tree view here after the stage completes.
 
-`<!-- Add CTS screenshot here -->`
 
 ## 18. Routing
 
@@ -511,9 +495,7 @@ The routing engine must follow technology-specific constraints, including permit
 
 Poor routing can lead to congestion, longer interconnects, timing problems or design-rule violations. Routing reports help identify whether the physical connections were completed successfully.
 
-**Screenshot placeholder:** Insert the routed layout or routing report here after routing completes.
 
-`<!-- Add routing screenshot here -->`
 
 ## 19. Physical Verification
 
@@ -540,9 +522,6 @@ Physical implementation can also require timing analysis using estimated or extr
 
 **Important:** These checks must actually run and produce reports before the project can claim successful physical verification.
 
-**Screenshot placeholder:** Insert the real DRC/LVS report here when available.
-
-`<!-- Add DRC and LVS screenshots here -->`
 
 ## 20. Layout and GDSII Generation
 
@@ -563,9 +542,6 @@ GDSII is a common layout database format used in integrated-circuit design workf
 
 ### Final Layout Screenshot
 
-Insert a screenshot from the actual layout viewer after a valid physical layout is available.
-
-`<!-- Add final layout screenshot here -->`
 
 **Current status:** Final physical layout and GDSII generation remain pending verification. No successful final GDSII output is claimed at this stage.
 
