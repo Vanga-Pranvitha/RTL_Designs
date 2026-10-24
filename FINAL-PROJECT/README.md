@@ -428,6 +428,7 @@ It considers the size of the design, placement regions, pin locations, power dis
 
 High utilization may reduce the available routing space, while very low utilization may increase the required area. The appropriate target depends on design constraints and the flow configuration.
 
+<img width="681" height="646" alt="floorplan" src="https://github.com/user-attachments/assets/8f30b60c-8d90-46c4-a01b-2af2448c8f0f" />
 
 
 ## 16. Placement
@@ -453,6 +454,8 @@ The placement engine considers connectivity and implementation constraints to po
 | Congestion information | Indicates areas with limited routing resources |
 | Timing reports | May show timing estimates for the placed design |
 
+<img width="681" height="646" alt="placement" src="https://github.com/user-attachments/assets/da2b85d1-d826-4895-97c7-b59fe9bba9b7" />
+
 
 ## 17. Clock Tree Synthesis
 
@@ -473,6 +476,7 @@ As a design becomes physically distributed, the clock signal may arrive at diffe
 
 CTS is only applicable where the design and flow have a clock network that requires synthesis. The exact result depends on the design's sequential logic and clock configuration.
 
+<img width="681" height="646" alt="cts" src="https://github.com/user-attachments/assets/407d4f1d-b36e-43a1-a109-69c7f2a50d1b" />
 
 
 ## 18. Routing
@@ -495,6 +499,7 @@ The routing engine must follow technology-specific constraints, including permit
 
 Poor routing can lead to congestion, longer interconnects, timing problems or design-rule violations. Routing reports help identify whether the physical connections were completed successfully.
 
+<img width="1366" height="655" alt="routing" src="https://github.com/user-attachments/assets/9867eda0-4edd-4ec5-97df-11b3809ee101" />
 
 
 ## 19. Physical Verification
@@ -522,6 +527,8 @@ Physical implementation can also require timing analysis using estimated or extr
 
 **Important:** These checks must actually run and produce reports before the project can claim successful physical verification.
 
+<img width="681" height="646" alt="signoff" src="https://github.com/user-attachments/assets/da98f4b0-05ec-4de9-adf2-f8914b30bbe3" />
+
 
 ## 20. Layout and GDSII Generation
 
@@ -540,7 +547,8 @@ GDSII is a common layout database format used in integrated-circuit design workf
 - [ ] Final GDSII generated.
 - [ ] Output files inspected and saved.
 
-### Final Layout Screenshot
+<img width="1366" height="655" alt="final" src="https://github.com/user-attachments/assets/a95ceca7-d3d3-49aa-ab10-427e10028be9" />
+
 
 
 **Current status:** Final physical layout and GDSII generation remain pending verification. No successful final GDSII output is claimed at this stage.
