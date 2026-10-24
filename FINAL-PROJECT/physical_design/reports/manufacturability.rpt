@@ -1,0 +1,19 @@
+Design Name: pill_reminder
+Run Directory: /work/runs/run1
+----------------------------------------
+
+Magic DRC Summary:
+Source: /work/runs/run1/reports/signoff/drc.rpt
+Total Magic DRC violations is 0
+----------------------------------------
+
+LVS Summary:
+Source: /work/runs/run1/logs/signoff/40-pill_reminder.lef.lvs.log
+Number of nets: 170                        |Number of nets: 170                        
+Design is LVS clean.
+----------------------------------------
+
+Antenna Summary:
+Source: /work/runs/run1/logs/signoff/42-arc.log
+Pin violations: 0
+Net violations: 0

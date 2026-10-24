@@ -1,0 +1,272 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2024  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.47+121 (git sha1 98b4affc4, g++ 13.2.0-23ubuntu4 -fPIC -O3)
+
+-- Running command `read_verilog src/pill_reminder.v; hierarchy -top pill_reminder; proc; opt; check; stat; write_verilog pill_reminder_netlist.v' --
+
+1. Executing Verilog-2005 frontend: src/pill_reminder.v
+Parsing Verilog input from `src/pill_reminder.v' to AST representation.
+Generating RTLIL representation for module `\pill_reminder'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \pill_reminder
+
+2.2. Analyzing design hierarchy..
+Top module:  \pill_reminder
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 5 switch rules as full_case in process $proc$src/pill_reminder.v:43$4 in module pill_reminder.
+Marked 1 switch rules as full_case in process $proc$src/pill_reminder.v:34$3 in module pill_reminder.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 4 redundant assignments.
+Promoted 1 assignment to connection.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~9 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\pill_reminder.$proc$src/pill_reminder.v:43$4'.
+     1/7: $0\ack_prev[0:0]
+     2/7: $0\ack_s2[0:0]
+     3/7: $0\ack_s1[0:0]
+     4/7: $0\blink_div[2:0]
+     5/7: $0\window_cnt[5:0]
+     6/7: $0\interval_cnt[9:0]
+     7/7: $0\state[1:0]
+Creating decoders for process `\pill_reminder.$proc$src/pill_reminder.v:34$3'.
+     1/1: $1\interval_val[9:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\pill_reminder.\interval_val' from process `\pill_reminder.$proc$src/pill_reminder.v:34$3'.
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\pill_reminder.\state' using process `\pill_reminder.$proc$src/pill_reminder.v:43$4'.
+  created $dff cell `$procdff$97' with positive edge clock.
+Creating register for signal `\pill_reminder.\interval_cnt' using process `\pill_reminder.$proc$src/pill_reminder.v:43$4'.
+  created $dff cell `$procdff$98' with positive edge clock.
+Creating register for signal `\pill_reminder.\window_cnt' using process `\pill_reminder.$proc$src/pill_reminder.v:43$4'.
+  created $dff cell `$procdff$99' with positive edge clock.
+Creating register for signal `\pill_reminder.\blink_div' using process `\pill_reminder.$proc$src/pill_reminder.v:43$4'.
+  created $dff cell `$procdff$100' with positive edge clock.
+Creating register for signal `\pill_reminder.\ack_s1' using process `\pill_reminder.$proc$src/pill_reminder.v:43$4'.
+  created $dff cell `$procdff$101' with positive edge clock.
+Creating register for signal `\pill_reminder.\ack_s2' using process `\pill_reminder.$proc$src/pill_reminder.v:43$4'.
+  created $dff cell `$procdff$102' with positive edge clock.
+Creating register for signal `\pill_reminder.\ack_prev' using process `\pill_reminder.$proc$src/pill_reminder.v:43$4'.
+  created $dff cell `$procdff$103' with positive edge clock.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 8 empty switches in `\pill_reminder.$proc$src/pill_reminder.v:43$4'.
+Removing empty process `pill_reminder.$proc$src/pill_reminder.v:43$4'.
+Found and cleaned up 1 empty switch in `\pill_reminder.$proc$src/pill_reminder.v:34$3'.
+Removing empty process `pill_reminder.$proc$src/pill_reminder.v:34$3'.
+Cleaned up 9 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pill_reminder.
+<suppressed ~11 debug messages>
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pill_reminder.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pill_reminder'.
+<suppressed ~27 debug messages>
+Removed a total of 9 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pill_reminder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~8 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pill_reminder.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pill_reminder'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$97 ($dff) from module pill_reminder (D = $procmux$72_Y, Q = \state, rval = 2'00).
+Adding EN signal on $auto$ff.cc:266:slice$104 ($sdff) from module pill_reminder (D = $procmux$72_Y, Q = \state).
+Adding EN signal on $procdff$98 ($dff) from module pill_reminder (D = $procmux$67_Y, Q = \interval_cnt).
+Adding SRST signal on $procdff$99 ($dff) from module pill_reminder (D = $procmux$40_Y, Q = \window_cnt, rval = 6'000000).
+Adding EN signal on $auto$ff.cc:266:slice$125 ($sdff) from module pill_reminder (D = $procmux$40_Y, Q = \window_cnt).
+Adding SRST signal on $procdff$100 ($dff) from module pill_reminder (D = $add$src/pill_reminder.v:56$6_Y, Q = \blink_div, rval = 3'000).
+Adding SRST signal on $procdff$101 ($dff) from module pill_reminder (D = \ack_btn, Q = \ack_s1, rval = 1'0).
+Adding SRST signal on $procdff$102 ($dff) from module pill_reminder (D = \ack_s1, Q = \ack_s2, rval = 1'0).
+Adding SRST signal on $procdff$103 ($dff) from module pill_reminder (D = \ack_s2, Q = \ack_prev, rval = 1'0).
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pill_reminder..
+Removed 7 unused cells and 53 unused wires.
+<suppressed ~8 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pill_reminder.
+<suppressed ~1 debug messages>
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pill_reminder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pill_reminder.
+    New ctrl vector for $pmux cell $procmux$54: { $procmux$47_CMP $auto$opt_reduce.cc:137:opt_pmux$146 }
+  Optimizing cells in module \pill_reminder.
+Performed a total of 1 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pill_reminder'.
+<suppressed ~9 debug messages>
+Removed a total of 3 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $auto$ff.cc:266:slice$118 ($dffe) from module pill_reminder (D = $0\interval_cnt[9:0], Q = \interval_cnt).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pill_reminder..
+Removed 0 unused cells and 3 unused wires.
+<suppressed ~1 debug messages>
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pill_reminder.
+
+4.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pill_reminder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+4.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pill_reminder.
+    New input vector for $reduce_and cell $auto$opt_dff.cc:220:make_patterns_logic$151: { $auto$opt_dff.cc:194:make_patterns_logic$148 $auto$opt_dff.cc:194:make_patterns_logic$121 $auto$opt_dff.cc:194:make_patterns_logic$119 }
+  Optimizing cells in module \pill_reminder.
+Performed a total of 1 changes.
+
+4.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pill_reminder'.
+Removed a total of 0 cells.
+
+4.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pill_reminder..
+Removed 1 unused cells and 1 unused wires.
+<suppressed ~2 debug messages>
+
+4.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pill_reminder.
+
+4.23. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.24. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pill_reminder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+4.25. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pill_reminder.
+Performed a total of 0 changes.
+
+4.26. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pill_reminder'.
+Removed a total of 0 cells.
+
+4.27. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.28. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pill_reminder..
+
+4.29. Executing OPT_EXPR pass (perform const folding).
+Optimizing module pill_reminder.
+
+4.30. Finished OPT passes. (There is nothing left to do.)
+
+5. Executing CHECK pass (checking for obvious problems).
+Checking module pill_reminder...
+Found and reported 0 problems.
+
+6. Printing statistics.
+
+=== pill_reminder ===
+
+   Number of wires:                 62
+   Number of wire bits:            187
+   Number of public wires:          17
+   Number of public wire bits:      44
+   Number of ports:                  8
+   Number of port bits:              9
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 57
+     $add                            1
+     $and                            3
+     $dffe                           1
+     $eq                             6
+     $logic_not                      2
+     $mux                           15
+     $ne                            10
+     $not                            1
+     $or                             1
+     $pmux                           4
+     $reduce_and                     3
+     $reduce_bool                    1
+     $reduce_or                      1
+     $sdff                           4
+     $sdffe                          2
+     $sub                            2
+
+7. Executing Verilog backend.
+
+7.1. Executing BMUXMAP pass.
+
+7.2. Executing DEMUXMAP pass.
+Dumping module `\pill_reminder'.
+
+End of script. Logfile hash: 95d3dd25f0, CPU: user 0.03s system 0.05s, MEM: 17.38 MB peak
+Yosys 0.47+121 (git sha1 98b4affc4, g++ 13.2.0-23ubuntu4 -fPIC -O3)
+Time spent: 20% 6x opt_expr (0 sec), 19% 2x read_verilog (0 sec), ...

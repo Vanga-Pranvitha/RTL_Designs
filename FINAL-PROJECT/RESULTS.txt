@@ -1,0 +1,34 @@
+PILL REMINDER TIMER CONTROLLER
+RTL DESIGN, VERIFICATION, AND PHYSICAL IMPLEMENTATION RESULTS
+
+1. RTL Simulation
+   Tool: Icarus Verilog
+   Checks: 96
+   Errors: 0
+   Recorded status: PASS
+
+2. Logic Synthesis
+   Tool: Yosys
+   Generic cells: 57
+   Reported problems: 0
+   Recorded status: PASS
+
+3. Gate-Level Simulation
+   Checks: 94
+   Errors: 0
+   Recorded status: PASS
+
+4. Physical Design
+   Tool flow: OpenLane; saved run: run1
+   Technology: SKY130 HD
+   Flow status: Completed
+   Magic DRC: 0 violations reported
+   LVS: 0 errors reported
+   Antenna: 0 pin and 0 net violations reported
+   Typical-corner timing: No setup or hold violations reported by the flow
+   Final GDSII: physical_design/results/final/gds/pill_reminder.gds
+
+Notes
+- The OpenLane log reports that the power grid was scaled because the core is small for the selected settings.
+- VSRC_LOC_FILES was not set, so the run log notes that IR-drop analysis accuracy may be affected.
+- The results above describe the saved run and its reports; they have not been rerun as part of this upload.

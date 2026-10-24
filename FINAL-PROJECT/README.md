@@ -57,7 +57,7 @@ This project provides practical experience with digital system design, hardware 
 | Physical Design Flow | OpenLane |
 | Target Technology | SkyWater SKY130 PDK |
 | Layout Support | Magic |
-| Current Status | RTL, synthesis and gate-level checks passed; physical design pending |
+| Current Status | RTL, synthesis, and gate-level checks passed; the saved OpenLane run completed with clean recorded DRC and LVS results |
 
 ## 2. Problem Statement
 
@@ -156,45 +156,51 @@ Final Layout / GDSII
 
 ## 6. Project Directory Structure
 
-The project uses separate directories for design source files and testbenches. Generated reports and simulation artifacts are kept separately from the RTL source.
+The project keeps RTL and testbenches separate from simulation, synthesis, and physical-design artifacts. The physical_design folder contains the saved OpenLane reports and results; temporary run databases are not included.
 
-```text
-final-project/
-│
-├── src/
-│   └── pill_reminder.v
-│
-├── tb/
-│   ├── tb_pill_reminder.v
-│   └── tb_pill_reminder_gls.v
-│
-├── pill_reminder_netlist.v
-├── pill_reminder_gls.v
-├── yosys.log
-├── gls_synthesis.log
-├── dump.vcd
-├── sim.out
-├── gls.out
-├── RESULTS.txt
-└── README.md
-```
+    FINAL-PROJECT/
+    ├── README.md
+    ├── RESULTS.txt
+    ├── config.json
+    ├── pill_reminder.sdc
+    ├── .gitignore
+    ├── src/
+    │   └── pill_reminder.v
+    ├── tb/
+    │   ├── tb_pill_reminder.v
+    │   └── tb_pill_reminder_gls.v
+    ├── simulation/
+    │   ├── dump.vcd
+    │   ├── sim.out
+    │   └── gls.out
+    ├── documentation/
+    │   └── synthesis/
+    │       ├── README.md
+    │       ├── pill_reminder_netlist.v
+    │       ├── pill_reminder_gls.v
+    │       ├── yosys.log
+    │       └── gls_synthesis.log
+    └── physical_design/
+        ├── README.md
+        ├── logs/
+        ├── reports/
+        └── results/
 
 | File / Directory | Description |
 |---|---|
-| `src/pill_reminder.v` | Main RTL design |
-| `tb/tb_pill_reminder.v` | RTL testbench |
-| `tb/tb_pill_reminder_gls.v` | Gate-level simulation testbench |
-| `pill_reminder_netlist.v` | Generated synthesized netlist |
-| `pill_reminder_gls.v` | Netlist used for gate-level simulation |
-| `yosys.log` | Synthesis log |
-| `gls_synthesis.log` | Gate-level synthesis or preparation log |
-| `dump.vcd` | Simulation waveform data |
-| `sim.out` | RTL simulation output, if retained |
-| `gls.out` | Gate-level simulation output, if retained |
-| `RESULTS.txt` | Summary of recorded project results |
-| `README.md` | Project documentation |
+| src/pill_reminder.v | Main RTL design |
+| tb/tb_pill_reminder.v | RTL testbench |
+| tb/tb_pill_reminder_gls.v | Gate-level simulation testbench |
+| config.json, pill_reminder.sdc | OpenLane design settings and timing constraints |
+| documentation/synthesis/ | Synthesized netlists and synthesis logs |
+| simulation/ | RTL and gate-level simulation outputs and waveform |
+| physical_design/reports/ | Saved floorplan, placement, CTS, routing, timing, DRC, and LVS reports |
+| physical_design/results/ | Saved implementation outputs, including final layout views and GDSII |
+| physical_design/logs/ | OpenLane flow log and command history |
+| RESULTS.txt | Summary of recorded project results |
+| README.md | Project documentation |
 
-*Generated filenames can differ depending on the commands and tool configuration used.*
+*The temporary OpenLane tmp directory and editor backup files are omitted; saved reports and results are retained.*
 
 ## 7. Digital Design Fundamentals
 
@@ -525,7 +531,7 @@ Physical implementation can also require timing analysis using estimated or extr
 | Timing analysis | Evaluate path timing | Meets configured timing constraints |
 | Routing checks | Inspect connectivity and route completion | No unresolved routing failures |
 
-**Important:** These checks must actually run and produce reports before the project can claim successful physical verification.
+The saved OpenLane run completed these checks. The corresponding reports are available in physical_design/reports.
 
 <img width="681" height="646" alt="signoff" src="https://github.com/user-attachments/assets/da98f4b0-05ec-4de9-adf2-f8914b30bbe3" />
 
@@ -534,24 +540,26 @@ Physical implementation can also require timing analysis using estimated or extr
 
 The physical layout represents the placement of circuit elements and their metal interconnections.
 
-GDSII is a common layout database format used in integrated-circuit design workflows. A valid final GDSII file should be generated from the configured flow after the required physical design stages have completed.
+GDSII is a common layout database format used in integrated-circuit design workflows. This run generated physical_design/results/final/gds/pill_reminder.gds after the configured physical-design stages completed.
 
 ### Layout Review Checklist
 
-- [ ] Floorplanning completed.
-- [ ] Placement completed.
-- [ ] Clock tree synthesis completed, if required.
-- [ ] Routing completed.
-- [ ] Required physical verification performed.
-- [ ] Timing and implementation reports reviewed.
-- [ ] Final GDSII generated.
-- [ ] Output files inspected and saved.
+- [x] Floorplanning completed.
+- [x] Placement completed.
+- [x] Clock tree synthesis completed, if required.
+- [x] Routing completed.
+- [x] Required physical verification performed.
+- [x] Timing and implementation reports reviewed.
+- [x] Final GDSII generated.
+- [x] Output files inspected and saved.
 
 <img width="1366" height="655" alt="final" src="https://github.com/user-attachments/assets/a95ceca7-d3d3-49aa-ab10-427e10028be9" />
 
 
 
-**Current status:** Final physical layout and GDSII generation remain pending verification. No successful final GDSII output is claimed at this stage.
+**Recorded run:** The saved OpenLane flow completed and generated the final GDSII at physical_design/results/final/gds/pill_reminder.gds. The flow log reports no setup or hold violations at the Typical corner. The manufacturability report records zero Magic DRC violations, zero LVS errors, and zero antenna pin or net violations. These results apply to this saved run and its configured SKY130 HD environment.
+
+The run also records a power-grid scaling warning because the core is small for the requested grid settings, and notes that IR-drop accuracy may be affected because VSRC_LOC_FILES was not set. Review the logs and reports in physical_design/ when interpreting the result.
 
 ## 21. Results Summary
 
@@ -563,14 +571,14 @@ The following table summarizes the currently recorded results.
 | 2 | RTL simulation | 96 checks, 0 errors | PASS |
 | 3 | Generic synthesis | 57 generic cells, 0 reported problems | PASS |
 | 4 | Gate-level simulation | 94 checks, 0 errors | PASS |
-| 5 | Floorplanning | Final result not verified | Pending |
-| 6 | Placement | Final result not verified | Pending |
-| 7 | Clock Tree Synthesis | Final result not verified | Pending |
-| 8 | Routing | Final result not verified | Pending |
-| 9 | DRC/LVS | Final reports not verified | Pending |
-| 10 | GDSII generation | Final file not verified | Pending |
+| 5 | Floorplanning | Completed in saved OpenLane run | PASS |
+| 6 | Placement | Completed in saved OpenLane run | PASS |
+| 7 | Clock Tree Synthesis | Completed in saved OpenLane run | PASS |
+| 8 | Routing | Completed; flow reports zero route violations | PASS |
+| 9 | DRC/LVS | 0 Magic DRC violations; 0 LVS errors | PASS |
+| 10 | GDSII generation | physical_design/results/final/gds/pill_reminder.gds | PASS |
 
-The completed simulation and synthesis results demonstrate progress through the logical design stages. Physical implementation must be completed and verified separately.
+The RTL and gate-level simulation summaries report 96 and 94 checks respectively, with zero errors. The saved OpenLane run completed through signoff; its reports and final layout outputs are included under physical_design/.
 
 ## 22. Challenges and Learning Outcomes
 
@@ -638,4 +646,4 @@ Overall, the project provides a foundation for understanding digital design, ver
 
 **Project:** Pill Reminder Timer Controller  
 **Design Language:** Verilog HDL  
-**Current Milestone:** RTL verification, generic synthesis and gate-level checks passed; physical design is in progress.
+**Current Milestone:** RTL verification, synthesis, gate-level simulation, and the saved OpenLane physical-design run completed. Recorded signoff reports show zero Magic DRC violations and zero LVS errors.

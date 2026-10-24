@@ -1,0 +1,25 @@
+
+55. Printing statistics.
+
+=== pill_reminder ===
+
+   Number of wires:                164
+   Number of wire bits:            205
+   Number of public wires:          15
+   Number of public wire bits:      34
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                185
+     $_ANDNOT_                      39
+     $_AND_                          9
+     $_MUX_                         45
+     $_NAND_                         2
+     $_NOR_                          7
+     $_NOT_                          6
+     $_ORNOT_                        7
+     $_OR_                          27
+     $_XNOR_                         4
+     $_XOR_                         14
+     sky130_fd_sc_hd__dfxtp_2       25
+

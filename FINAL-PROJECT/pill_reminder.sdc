@@ -1,0 +1,5 @@
+create_clock -name clk -period 20 [get_ports clk]
+set_input_delay 4 -clock clk [lsearch -inline -all -not -exact [all_inputs] [get_ports clk]]
+set_output_delay 4 -clock clk [all_outputs]
+set_driving_cell -lib_cell sky130_fd_sc_hd__inv_8 -pin Y [all_inputs]
+set_load 0.01765 [all_outputs]

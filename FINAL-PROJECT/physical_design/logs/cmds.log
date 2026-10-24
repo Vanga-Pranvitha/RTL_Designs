@@ -1,0 +1,250 @@
+Sat Oct 24 04:20:27 +0000 2026 - Executing "{openroad -exit -no_init -python /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/odbpy/lefutil.py get_metal_layers -o /work/runs/run1/tmp/layers.list /pdk/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef}"
+
+Sat Oct 24 04:20:31 +0000 2026 - Executing "{/nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/mergeLef.py -o /work/runs/run1/tmp/merged.nom.lef -i /pdk/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef {/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd.lef /pdk/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef} |& tee /dev/null}"
+
+Sat Oct 24 04:20:31 +0000 2026 - Executing "{/nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/mergeLef.py -o /work/runs/run1/tmp/merged.min.lef -i /pdk/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__min.tlef {/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd.lef /pdk/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef} |& tee /dev/null}"
+
+Sat Oct 24 04:20:31 +0000 2026 - Executing "{/nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/mergeLef.py -o /work/runs/run1/tmp/merged.max.lef -i /pdk/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__max.tlef {/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd.lef /pdk/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef} |& tee /dev/null}"
+
+Sat Oct 24 04:20:31 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/mergeLib.py --output /work/runs/run1/tmp/synthesis/merged.lib --name sky130A_merged /pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib}"
+
+Sat Oct 24 04:20:32 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/libtrim.py --cell-file /work/runs/run1/tmp/synthesis/trimmed.lib.exclude.list --output /work/runs/run1/tmp/synthesis/trimmed.lib /work/runs/run1/tmp/synthesis/merged.lib}"
+
+Sat Oct 24 04:20:32 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/libtrim.py --cell-file /work/runs/run1/tmp/cts/cts.lib.exclude.list --output /work/runs/run1/tmp/cts/cts.lib /pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib}"
+
+Sat Oct 24 04:20:32 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/libtrim.py --cell-file /work/runs/run1/tmp/cts/cts-fastest.lib.exclude.list --output /work/runs/run1/tmp/cts/cts-fastest.lib /pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib}"
+
+Sat Oct 24 04:20:34 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/libtrim.py --cell-file /work/runs/run1/tmp/cts/cts-slowest.lib.exclude.list --output /work/runs/run1/tmp/cts/cts-slowest.lib /pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib}"
+
+Sat Oct 24 04:20:34 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/new_tracks.py -i /pdk/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tracks.info -o /work/runs/run1/tmp/routing/config.tracks}"
+
+Sat Oct 24 04:20:34 +0000 2026 - Executing "{echo {OpenLane } > /work/runs/run1/OPENLANE_COMMIT}"
+
+Sat Oct 24 04:20:34 +0000 2026 - Executing "{yosys -c /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/yosys/blackbox.tcl}"
+
+Sat Oct 24 04:20:35 +0000 2026 - Executing "{verilator -Wall --lint-only --Wno-DECLFILENAME --top-module pill_reminder /work/runs/run1/tmp/synthesis/blackbox/sky130_fd_sc_hd__blackbox.v /work/src/pill_reminder.v -Wno-fatal --relative-includes |& tee /work/runs/run1/logs/synthesis/linter.log /dev/null}"
+
+Sat Oct 24 04:20:36 +0000 2026 - Executing "{sed -E {s/^([[:space:]]+)pg_pin(.*)/\1pin\2\n\1    direction : "inout";/g} /pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib > /work/runs/run1/tmp/synthesis/1-sky130_fd_sc_hd__tt_025C_1v80.no_pg.lib}"
+
+Sat Oct 24 04:20:36 +0000 2026 - Executing "{sed -E {s/^([[:space:]]+)pg_pin(.*)/\1pin\2\n\1    direction : "inout";/g} /work/runs/run1/tmp/synthesis/trimmed.lib > /work/runs/run1/tmp/synthesis/1-trimmed.no_pg.lib}"
+
+Sat Oct 24 04:20:36 +0000 2026 - Executing "yosys -c /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/yosys/synth.tcl |& tee /dev/null /work/runs/run1/logs/synthesis/1-synthesis.log"
+
+Sat Oct 24 04:20:36 +0000 2026 - Executing "{yosys -c /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/yosys/synth.tcl |& tee /dev/null /work/runs/run1/logs/synthesis/1-synthesis.log}"
+
+Sat Oct 24 04:20:38 +0000 2026 - Executing "{sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/work\/runs\/run1\/results\/synthesis\/pill_reminder.v/} /work/runs/run1/config.tcl}"
+
+Sat Oct 24 04:20:38 +0000 2026 - Executing "{sed -i.bak /defparam/d /work/runs/run1/results/synthesis/pill_reminder.v}"
+
+Sat Oct 24 04:20:39 +0000 2026 - Executing "sta -exit -no_init /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/synthesis/2-sta.log"
+
+Sat Oct 24 04:20:39 +0000 2026 - Executing "{sta -exit -no_init /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/synthesis/2-sta.log}"
+
+Sat Oct 24 04:20:40 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/floorplan.tcl |& tee /dev/null /work/runs/run1/logs/floorplan/3-initial_fp.log"
+
+Sat Oct 24 04:20:40 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/floorplan.tcl |& tee /dev/null /work/runs/run1/logs/floorplan/3-initial_fp.log}"
+
+Sat Oct 24 04:20:42 +0000 2026 - Executing "{openroad -exit -no_init -python /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/odbpy/snap_to_grid.py --output /work/runs/run1/tmp/floorplan/3-minimized_pdn.txt --input-lef /work/runs/run1/tmp/merged.nom.lef 7.705 7.4799999999999995 15.41 14.959999999999999}"
+
+Sat Oct 24 04:20:43 +0000 2026 - Executing "{openroad -exit -no_init -python /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/odbpy/defutil.py extract_core_dims --output-data /work/runs/run1/tmp/dimensions.txt --input-lef /work/runs/run1/tmp/merged.nom.lef /work/runs/run1/tmp/floorplan/3-initial_fp.def}"
+
+Sat Oct 24 04:20:43 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/ioplacer.tcl |& tee /dev/null /work/runs/run1/logs/floorplan/4-io.log"
+
+Sat Oct 24 04:20:44 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/ioplacer.tcl |& tee /dev/null /work/runs/run1/logs/floorplan/4-io.log}"
+
+Sat Oct 24 04:20:45 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/tapcell.tcl |& tee /dev/null /work/runs/run1/logs/floorplan/5-tap.log"
+
+Sat Oct 24 04:20:45 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/tapcell.tcl |& tee /dev/null /work/runs/run1/logs/floorplan/5-tap.log}"
+
+Sat Oct 24 04:20:46 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/pdn.tcl |& tee /dev/null /work/runs/run1/logs/floorplan/6-pdn.log"
+
+Sat Oct 24 04:20:46 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/pdn.tcl |& tee /dev/null /work/runs/run1/logs/floorplan/6-pdn.log}"
+
+Sat Oct 24 04:20:47 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/gpl.tcl |& tee /dev/null /work/runs/run1/logs/placement/6-global_skip_io.log"
+
+Sat Oct 24 04:20:47 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/gpl.tcl |& tee /dev/null /work/runs/run1/logs/placement/6-global_skip_io.log}"
+
+Sat Oct 24 04:20:48 +0000 2026 - Executing "{sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/work\/runs\/run1\/tmp\/placement\/7-global_skip_io.nl.v/} /work/runs/run1/config.tcl}"
+
+Sat Oct 24 04:20:49 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/placement/8-gpl_sta.log"
+
+Sat Oct 24 04:20:49 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/placement/8-gpl_sta.log}"
+
+Sat Oct 24 04:20:50 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/ioplacer.tcl |& tee /dev/null /work/runs/run1/logs/placement/9-io.log"
+
+Sat Oct 24 04:20:50 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/ioplacer.tcl |& tee /dev/null /work/runs/run1/logs/placement/9-io.log}"
+
+Sat Oct 24 04:20:51 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/gpl.tcl |& tee /dev/null /work/runs/run1/logs/placement/9-global.log"
+
+Sat Oct 24 04:20:51 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/gpl.tcl |& tee /dev/null /work/runs/run1/logs/placement/9-global.log}"
+
+Sat Oct 24 04:20:52 +0000 2026 - Executing "{sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/work\/runs\/run1\/tmp\/placement\/10-global.nl.v/} /work/runs/run1/config.tcl}"
+
+Sat Oct 24 04:20:53 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/placement/11-gpl_sta.log"
+
+Sat Oct 24 04:20:53 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/placement/11-gpl_sta.log}"
+
+Sat Oct 24 04:20:54 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/resizer.tcl |& tee /dev/null /work/runs/run1/logs/placement/12-resizer.log"
+
+Sat Oct 24 04:20:54 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/resizer.tcl |& tee /dev/null /work/runs/run1/logs/placement/12-resizer.log}"
+
+Sat Oct 24 04:20:57 +0000 2026 - Executing "{sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/work\/runs\/run1\/tmp\/placement\/12-resizer.nl.v/} /work/runs/run1/config.tcl}"
+
+Sat Oct 24 04:20:58 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/dpl.tcl |& tee /dev/null /work/runs/run1/logs/placement/13-detailed.log"
+
+Sat Oct 24 04:20:58 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/dpl.tcl |& tee /dev/null /work/runs/run1/logs/placement/13-detailed.log}"
+
+Sat Oct 24 04:20:58 +0000 2026 - Executing "{sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/work\/runs\/run1\/results\/placement\/pill_reminder.nl.v/} /work/runs/run1/config.tcl}"
+
+Sat Oct 24 04:20:59 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/placement/14-dpl_sta.log"
+
+Sat Oct 24 04:20:59 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/placement/14-dpl_sta.log}"
+
+Sat Oct 24 04:21:00 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/cts.tcl |& tee /dev/null /work/runs/run1/logs/cts/15-cts.log"
+
+Sat Oct 24 04:21:00 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/cts.tcl |& tee /dev/null /work/runs/run1/logs/cts/15-cts.log}"
+
+Sat Oct 24 04:21:12 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/cts/16-cts_sta.log"
+
+Sat Oct 24 04:21:12 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/cts/16-cts_sta.log}"
+
+Sat Oct 24 04:21:14 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/resizer_timing.tcl |& tee /dev/null /work/runs/run1/logs/cts/17-resizer.log"
+
+Sat Oct 24 04:21:14 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/resizer_timing.tcl |& tee /dev/null /work/runs/run1/logs/cts/17-resizer.log}"
+
+Sat Oct 24 04:21:17 +0000 2026 - Executing "{sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/work\/runs\/run1\/tmp\/cts\/17-pill_reminder.resized.nl.v/} /work/runs/run1/config.tcl}"
+
+Sat Oct 24 04:21:17 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/resizer_routing_design.tcl |& tee /dev/null /work/runs/run1/logs/routing/18-resizer_design.log"
+
+Sat Oct 24 04:21:17 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/resizer_routing_design.tcl |& tee /dev/null /work/runs/run1/logs/routing/18-resizer_design.log}"
+
+Sat Oct 24 04:21:21 +0000 2026 - Executing "{sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/work\/runs\/run1\/tmp\/18-pill_reminder.nl.v/} /work/runs/run1/config.tcl}"
+
+Sat Oct 24 04:21:21 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/routing/19-rsz_design_sta.log"
+
+Sat Oct 24 04:21:21 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/routing/19-rsz_design_sta.log}"
+
+Sat Oct 24 04:21:22 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/resizer_routing_timing.tcl |& tee /dev/null /work/runs/run1/logs/routing/20-resizer_timing.log"
+
+Sat Oct 24 04:21:22 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/resizer_routing_timing.tcl |& tee /dev/null /work/runs/run1/logs/routing/20-resizer_timing.log}"
+
+Sat Oct 24 04:21:26 +0000 2026 - Executing "{sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/work\/runs\/run1\/tmp\/20-pill_reminder.nl.v/} /work/runs/run1/config.tcl}"
+
+Sat Oct 24 04:21:26 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/routing/21-rsz_timing_sta.log"
+
+Sat Oct 24 04:21:26 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/routing/21-rsz_timing_sta.log}"
+
+Sat Oct 24 04:21:27 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/repair_antennas.tcl |& tee /dev/null /work/runs/run1/logs/routing/22-global.log"
+
+Sat Oct 24 04:21:27 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/repair_antennas.tcl |& tee /dev/null /work/runs/run1/logs/routing/22-global.log}"
+
+Sat Oct 24 04:21:29 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/write_views.tcl |& tee /dev/null /work/runs/run1/logs/routing/22-global_write_netlist.log"
+
+Sat Oct 24 04:21:29 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/write_views.tcl |& tee /dev/null /work/runs/run1/logs/routing/22-global_write_netlist.log}"
+
+Sat Oct 24 04:21:29 +0000 2026 - Executing "{sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/work\/runs\/run1\/tmp\/routing\/global.nl.v/} /work/runs/run1/config.tcl}"
+
+Sat Oct 24 04:21:30 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/routing/24-grt_sta.log"
+
+Sat Oct 24 04:21:30 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/routing/24-grt_sta.log}"
+
+Sat Oct 24 04:21:31 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/fill.tcl |& tee /dev/null /work/runs/run1/logs/routing/25-fill.log"
+
+Sat Oct 24 04:21:31 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/fill.tcl |& tee /dev/null /work/runs/run1/logs/routing/25-fill.log}"
+
+Sat Oct 24 04:21:32 +0000 2026 - Executing "{sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/work\/runs\/run1\/tmp\/routing\/25-fill.nl.v/} /work/runs/run1/config.tcl}"
+
+Sat Oct 24 04:21:32 +0000 2026 - Executing "openroad -exit -metrics /work/runs/run1/reports/routing/26-drt_metrics.json /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/droute.tcl |& tee /dev/null /work/runs/run1/logs/routing/26-detailed.log"
+
+Sat Oct 24 04:21:32 +0000 2026 - Executing "{openroad -exit -metrics /work/runs/run1/reports/routing/26-drt_metrics.json /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/droute.tcl |& tee /dev/null /work/runs/run1/logs/routing/26-detailed.log}"
+
+Sat Oct 24 04:21:54 +0000 2026 - Executing "{sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/work\/runs\/run1\/results\/routing\/pill_reminder.nl.v/} /work/runs/run1/config.tcl}"
+
+Sat Oct 24 04:21:55 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/drc_rosetta.py tr to_klayout -o /work/runs/run1/reports/routing/drt.klayout.xml --design-name pill_reminder /work/runs/run1/reports/routing/drt.drc}"
+
+Sat Oct 24 04:21:55 +0000 2026 - Executing "{openroad -exit -no_init -python /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/odbpy/wire_lengths.py --report-out /work/runs/run1/reports/routing/27-wire_lengths.csv --input-lef /work/runs/run1/tmp/merged.nom.lef --output-def /work/runs/run1/results/routing/pill_reminder.def --output /work/runs/run1/results/routing/pill_reminder.odb /work/runs/run1/results/routing/pill_reminder.odb |& tee /dev/null /work/runs/run1/logs/routing/27-wire_lengths.log}"
+
+Sat Oct 24 04:21:56 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/rcx.tcl |& tee /dev/null /work/runs/run1/logs/signoff/28-parasitics_extraction.min.log"
+
+Sat Oct 24 04:21:56 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/rcx.tcl |& tee /dev/null /work/runs/run1/logs/signoff/28-parasitics_extraction.min.log}"
+
+Sat Oct 24 04:21:57 +0000 2026 - Executing "sta -exit -no_init /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/signoff/29-rcx_mcsta.min.log"
+
+Sat Oct 24 04:21:57 +0000 2026 - Executing "{sta -exit -no_init /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/signoff/29-rcx_mcsta.min.log}"
+
+Sat Oct 24 04:22:01 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/rcx.tcl |& tee /dev/null /work/runs/run1/logs/signoff/30-parasitics_extraction.max.log"
+
+Sat Oct 24 04:22:01 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/rcx.tcl |& tee /dev/null /work/runs/run1/logs/signoff/30-parasitics_extraction.max.log}"
+
+Sat Oct 24 04:22:02 +0000 2026 - Executing "sta -exit -no_init /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/signoff/31-rcx_mcsta.max.log"
+
+Sat Oct 24 04:22:02 +0000 2026 - Executing "{sta -exit -no_init /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/signoff/31-rcx_mcsta.max.log}"
+
+Sat Oct 24 04:22:06 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/rcx.tcl |& tee /dev/null /work/runs/run1/logs/signoff/32-parasitics_extraction.nom.log"
+
+Sat Oct 24 04:22:06 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/rcx.tcl |& tee /dev/null /work/runs/run1/logs/signoff/32-parasitics_extraction.nom.log}"
+
+Sat Oct 24 04:22:07 +0000 2026 - Executing "sta -exit -no_init /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/signoff/33-rcx_mcsta.nom.log"
+
+Sat Oct 24 04:22:07 +0000 2026 - Executing "{sta -exit -no_init /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/sta/multi_corner.tcl |& tee /dev/null /work/runs/run1/logs/signoff/33-rcx_mcsta.nom.log}"
+
+Sat Oct 24 04:22:11 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/irdrop.tcl |& tee /dev/null /work/runs/run1/logs/signoff/34-irdrop.log"
+
+Sat Oct 24 04:22:11 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/irdrop.tcl |& tee /dev/null /work/runs/run1/logs/signoff/34-irdrop.log}"
+
+Sat Oct 24 04:22:13 +0000 2026 - Executing "magic -noconsole -dnull -rcfile /pdk/sky130A/libs.tech/magic/sky130A.magicrc < /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/magic/wrapper.tcl |& tee /dev/null /work/runs/run1/logs/signoff/35-gdsii.log"
+
+Sat Oct 24 04:22:13 +0000 2026 - Executing "{magic -noconsole -dnull -rcfile /pdk/sky130A/libs.tech/magic/sky130A.magicrc < /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/magic/wrapper.tcl |& tee /dev/null /work/runs/run1/logs/signoff/35-gdsii.log}"
+
+Sat Oct 24 04:22:14 +0000 2026 - Executing "magic -noconsole -dnull -rcfile /pdk/sky130A/libs.tech/magic/sky130A.magicrc < /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/magic/wrapper.tcl |& tee /dev/null /work/runs/run1/logs/signoff/35-gds_ptrs.log"
+
+Sat Oct 24 04:22:14 +0000 2026 - Executing "{magic -noconsole -dnull -rcfile /pdk/sky130A/libs.tech/magic/sky130A.magicrc < /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/magic/wrapper.tcl |& tee /dev/null /work/runs/run1/logs/signoff/35-gds_ptrs.log}"
+
+Sat Oct 24 04:22:15 +0000 2026 - Executing "{sed -i.bak -n {/^<< properties >>/,/^<< end >>/p} /work/runs/run1/tmp/signoff/gds_ptrs.mag}"
+
+Sat Oct 24 04:22:15 +0000 2026 - Executing "magic -noconsole -dnull -rcfile /pdk/sky130A/libs.tech/magic/sky130A.magicrc < /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/magic/wrapper.tcl |& tee /dev/null /work/runs/run1/logs/signoff/35-lef.log"
+
+Sat Oct 24 04:22:15 +0000 2026 - Executing "{magic -noconsole -dnull -rcfile /pdk/sky130A/libs.tech/magic/sky130A.magicrc < /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/magic/wrapper.tcl |& tee /dev/null /work/runs/run1/logs/signoff/35-lef.log}"
+
+Sat Oct 24 04:22:16 +0000 2026 - Executing "magic -noconsole -dnull -rcfile /pdk/sky130A/libs.tech/magic/sky130A.magicrc < /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/magic/wrapper.tcl |& tee /dev/null /work/runs/run1/logs/signoff/35-maglef.log"
+
+Sat Oct 24 04:22:16 +0000 2026 - Executing "{magic -noconsole -dnull -rcfile /pdk/sky130A/libs.tech/magic/sky130A.magicrc < /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/magic/wrapper.tcl |& tee /dev/null /work/runs/run1/logs/signoff/35-maglef.log}"
+
+Sat Oct 24 04:22:17 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/klayout/stream_out.py --output /work/runs/run1/results/signoff/pill_reminder.klayout.gds --lyt /pdk/sky130A/libs.tech/klayout/tech/sky130A.lyt --lym /pdk/sky130A/libs.tech/klayout/tech/sky130A.map --lyp /pdk/sky130A/libs.tech/klayout/tech/sky130A.lyp --top pill_reminder --with-gds-file /pdk/sky130A/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds --input-lef /work/runs/run1/tmp/merged.nom.lef /work/runs/run1/results/routing/pill_reminder.def |& tee /dev/null /work/runs/run1/logs/signoff/36-gdsii-klayout.log}"
+
+Sat Oct 24 04:22:19 +0000 2026 - Executing "magic -noconsole -dnull -rcfile /pdk/sky130A/libs.tech/magic/sky130A.magicrc < /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/magic/wrapper.tcl |& tee /dev/null /work/runs/run1/logs/signoff/37-spice.log"
+
+Sat Oct 24 04:22:19 +0000 2026 - Executing "{magic -noconsole -dnull -rcfile /pdk/sky130A/libs.tech/magic/sky130A.magicrc < /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/magic/wrapper.tcl |& tee /dev/null /work/runs/run1/logs/signoff/37-spice.log}"
+
+Sat Oct 24 04:22:21 +0000 2026 - Executing "{openroad -exit -no_init -python /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/odbpy/power_utils.py write_powered_def --output /work/runs/run1/tmp/signoff/37-pill_reminder.p.def --input-lef /work/runs/run1/tmp/merged.nom.lef --power-port VPWR --ground-port VGND --powered-netlist {} /work/runs/run1/results/routing/pill_reminder.def |& tee /dev/null /work/runs/run1/logs/signoff/38-write_powered_def.log}"
+
+Sat Oct 24 04:22:21 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/write_views.tcl |& tee /dev/null /work/runs/run1/logs/signoff/38-write_powered_verilog.log"
+
+Sat Oct 24 04:22:21 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/write_views.tcl |& tee /dev/null /work/runs/run1/logs/signoff/38-write_powered_verilog.log}"
+
+Sat Oct 24 04:22:22 +0000 2026 - Executing "{sed -i.bak -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/work\/runs\/run1\/tmp\/signoff\/37-pill_reminder.nl.v/} /work/runs/run1/config.tcl}"
+
+Sat Oct 24 04:22:23 +0000 2026 - Executing "{netgen -batch source /work/runs/run1/tmp/signoff/40-setup_file.lef.lvs |& tee /dev/null /work/runs/run1/logs/signoff/40-lvs.lef.log}"
+
+Sat Oct 24 04:22:23 +0000 2026 - Executing "magic -noconsole -dnull -rcfile /pdk/sky130A/libs.tech/magic/sky130A.magicrc < /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/magic/wrapper.tcl |& tee /dev/null /work/runs/run1/logs/signoff/41-drc.log"
+
+Sat Oct 24 04:22:23 +0000 2026 - Executing "{magic -noconsole -dnull -rcfile /pdk/sky130A/libs.tech/magic/sky130A.magicrc < /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/magic/wrapper.tcl |& tee /dev/null /work/runs/run1/logs/signoff/41-drc.log}"
+
+Sat Oct 24 04:22:25 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/drc_rosetta.py magic to_tcl -o /work/runs/run1/reports/signoff/drc.tcl /work/runs/run1/reports/signoff/drc.rpt}"
+
+Sat Oct 24 04:22:25 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/drc_rosetta.py magic to_tr -o /work/runs/run1/reports/signoff/drc.tr /work/runs/run1/reports/signoff/drc.rpt}"
+
+Sat Oct 24 04:22:25 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/drc_rosetta.py tr to_klayout -o /work/runs/run1/reports/signoff/drc.klayout.xml --design-name pill_reminder /work/runs/run1/reports/signoff/drc.tr}"
+
+Sat Oct 24 04:22:25 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/drc_rosetta.py magic to_rdb -o /work/runs/run1/reports/signoff/drc.rdb /work/runs/run1/reports/signoff/drc.rpt}"
+
+Sat Oct 24 04:22:26 +0000 2026 - Executing "openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/antenna_check.tcl |& tee /dev/null /work/runs/run1/logs/signoff/42-arc.log"
+
+Sat Oct 24 04:22:26 +0000 2026 - Executing "{openroad -exit /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/openroad/antenna_check.tcl |& tee /dev/null /work/runs/run1/logs/signoff/42-arc.log}"
+
+Sat Oct 24 04:22:26 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/extract_antenna_violators.py --output /work/runs/run1/reports/signoff/42-antenna_violators.rpt --plain-out /work/runs/run1/reports/signoff/42-antenna_violators_pins.txt /work/runs/run1/logs/signoff/42-arc.log}"
+
+Sat Oct 24 04:22:27 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/write_runtime.py --conclude --seconds --time-in 1792815747 {flow completed}}"
+
+Sat Oct 24 04:22:27 +0000 2026 - Executing "{python3 /nix/store/xpc7xd67rslanlqh566s6jph53bn830w-openlane1-1.1.1/bin/scripts/generate_reports.py -d /work --design_name pill_reminder --tag run1 --output_file /work/runs/run1/reports/metrics.csv --man_report /work/runs/run1/reports/manufacturability.rpt --run_path /work/runs/run1}"
+

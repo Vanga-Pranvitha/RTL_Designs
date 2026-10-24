@@ -1,0 +1,5 @@
+# Temporary OpenLane databases and technology-library scratch files
+/runs/*/tmp/
+
+# Editor backup files
+*.save
